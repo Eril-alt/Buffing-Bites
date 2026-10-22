@@ -1,8 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
 package com.mycompany.buffingbites;
 
 /*
@@ -37,7 +32,12 @@ public class ScoreManager {
      * Suggested starting value: 10 points.
      */
     public void addFoodPoints() {
-        // YOUR CODE HERE
+        if (gameOver) {
+            return;
+        }
+
+        currentScore += 10; //tentative - depende sa fruit
+        updateBestScore(); 
     }
 
     /*
@@ -45,7 +45,12 @@ public class ScoreManager {
      * The points argument allows different fruits to award different amounts.
      */
     public void addBonusPoints(int points) {
-        // YOUR CODE HERE
+        if (gameOver || points <= 0) {
+            return;
+        }
+
+        currentScore += points;
+        updateBestScore();    
     }
 
     /*
@@ -69,7 +74,7 @@ public class ScoreManager {
      * and with Tantay on saving the final score.
      */
     public void endGame() {
-        // YOUR CODE HERE
+         gameOver = true;
     }
 
     /*
@@ -77,7 +82,8 @@ public class ScoreManager {
      * Keep the session best score unless the group decides otherwise.
      */
     public void resetScore() {
-        // YOUR CODE HERE
+        currentScore = 0;
+        gameOver = false;
     }
 
     /*
@@ -85,7 +91,9 @@ public class ScoreManager {
      * Call this after changing the score.
      */
     private void updateBestScore() {
-        // YOUR CODE HERE
+         if (currentScore > sessionBestScore) {
+            sessionBestScore = currentScore;
+        }
     }
 
     /*
